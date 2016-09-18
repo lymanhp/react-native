@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>git教程文档</title>
+</head>
+
+<body>
+<div>
+	建立一个库jq源码分析
+		git  clone  [url]
+
+	设置贡献者
+		需要设置贡献者的name和email
+		git config --global  user.name 设置贡献者name
+		git config --global user.email 设置贡献者邮箱
+		git config --list 查看所有配置项
+
+	git的三个区
+		工作区
+		暂存区
+			作为过渡层
+			避免误操作
+			保护工作区和版本区
+			分支处理
+		版本区（库）
+
+	Git命令
+		提交
+			git status 查看状态
+			git add <file.name>      把一个文件添加到暂存区
+			git add	 .      		 把所有文件添加到暂存区
+			git commit 	   		     提交到版本库，会弹出一个文本让我们做记录
+			git commit -m "备注"     提交到版本库，不打开文本，备注里面做记录
+			git commit -a -m "备注"  从工作区到缓存区再到版本库，相当于简写
+		对比
+			git diff					   工作区和暂存区对比
+			git diff --cached(--staged)    暂存区和版本库对比
+			git diff master				   版本库和工作区对比
+		撤销
+			git reset HEAD <file.name>     将暂存区撤销回工作区状态
+			git checkout -- <file.name>    将工作区撤销回版本区状态
+			git commit --amend             一起提交
+		删除
+			git rm <file.name> 			   删除暂存区文件(工作区文件已手动删除的情况下，没有手动删除则删除不成功)
+			git rm -f <file.name> 		   删除暂存区文件，同时删除工作区文件
+			git rm --cached <file.name>    删除暂存区文件，不会删除工作区文件
+		恢复
+			git checkout commit_id <file.name>  恢复某个历史版本的单个文件，commit_id为某个版本的版本号，通过git log查看历史版本
+			git reset --hard commit_id			恢复到某个历史版本
+			git reset --hard HEAD^ 				恢复到上一个版本，^表示向后
+			git reset --hard HEAD~< num >		恢复到上num个版本
+			git reflog							查看恢复之前的历史版本
+		同步到远程仓库
+			git remote				 查看远程仓库的名字，默认为origin
+			git remote -v			 查看远程仓库对应的地址
+			git push origin master	 推送到远程仓库，origin为远程仓库默认名字，master为主分支名
+
+	多人协作解决冲突
+		git fetch							 从远端拉取不合并
+			Git diff master origin/master	 	接着将工作区和远程仓库进行比较
+			Git merge  orgin/master				合并远程拉取的
+		git pull							 从远端拉取合并	
+
+	Git分支
+		git branch						查看分支
+		git branch <branch.name> 		新建分支
+		git branch -D <branch.name>     删除分支
+		git checkout <branch.name>  	切换到某个分支
+		git checkout -b <branch.name> 	快速新建分支并且切换到该分支
+		git merge <branch.name>			合并某个分支(到主分支)
+	github上的分支
+		git push origin <branch.name>	将某个分支推送到远程仓库		
+		法二：github上直接创建
+
+	github上的标签
+		git tag <tag.name> 		打标签，git tag v1.0，然后推送git push origin v1.0
+		法二：github上直接创建
+
+</div>
+<div>
+	首先gitbub上建立一个项目、
+	cd C:/Users/cpr254/Desktop/jq源码分析 <!-- 进入想要进入的项目路径 -->
+	git clone https://github.com/1301829682/JQ-Source.git <!-- 克隆github项目地址，下载到本地-->
+	cd JQ-Source <!-- 必须先进入下载项目 -->
+	git config --global user.name '1301829682' <!-- 设置贡献者name -->
+	git config --global user.email '1301829682@qq.com' <!-- 设置贡献者邮箱 -->
+	git status <!-- 查看状态 -->
+	git commit -a -m '提交1' <!-- 提交到版本区 -->
+	git push origin master	<!-- 推送到远程仓库 -->
+</div>
+</body>
+</html>
